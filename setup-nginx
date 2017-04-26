@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "$REPLACE_DEFAULT" = true ] ; then
+    envsubst < $NGINX_SITE_FILE > /etc/nginx/sites-available/default
+fi
+
+eval "$@";
