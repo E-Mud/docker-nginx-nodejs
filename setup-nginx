@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [ "$REPLACE_DEFAULT" = true ] ; then
-    envsubst < $NGINX_SITE_FILE > /etc/nginx/sites-available/default
+    envsubst "`for v in $(compgen -v);do printf '$${%s} ' $v;done`'" < $NGINX_SITE_FILE > /etc/nginx/sites-available/default
+    # envsubst -v < $NGINX_SITE_FILE > /etc/nginx/sites-available/default
 fi
 
-eval "$@";
+exec "$@";
